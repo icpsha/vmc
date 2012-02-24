@@ -11,6 +11,7 @@ module VMC::Cli
       'Grails'   => ['grails',  { :mem => '512M', :description => 'Java SpringSource Grails Application'}],
       'Lift'   =>   ['lift',    { :mem => '512M', :description => 'Scala Lift Application'}],
       'JavaWeb'  => ['java_web',{ :mem => '512M', :description => 'Java Web Application'}],
+      'Virgo'    => ['virgo',   { :mem => '256M', :description => 'Eclipse Virgo Application'}],
       'Sinatra'  => ['sinatra', { :mem => '128M', :description => 'Sinatra Application'}],
       'Node'     => ['node',    { :mem => '64M',  :description => 'Node.js Application'}],
       'PHP'      => ['php',     { :mem => '128M', :description => 'PHP Application'}],
@@ -104,6 +105,10 @@ module VMC::Cli
           # Python
           elsif !Dir.glob('wsgi.py').empty?
             return Framework.lookup('WSGI')
+
+          # Virgo
+          elsif !Dir.glob('*.par').empty? || !Dir.glob('*.plan').empty?
+            return Framework.lookup('Virgo')
 
           end
         end
